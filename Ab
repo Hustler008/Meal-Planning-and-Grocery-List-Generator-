@@ -1,0 +1,50 @@
+class Meal:
+    def __init__(self, name, ingredients):
+        self.name = name
+        self.ingredients = ingredients
+
+class MealPlan:
+    def __init__(self):
+        self.meals = []
+        self.ingredients = {}
+        self.dietary_restrictions = []
+
+    def add_meal(self, meal):
+        self.meals.append(meal)
+        for ingredient in meal.ingredients:
+            if ingredient in self.ingredients:
+                self.ingredients[ingredient] += 1
+            else:
+                self.ingredients[ingredient] = 1
+
+    def remove_meal(self, meal):
+        self.meals.remove(meal)
+        for ingredient in meal.ingredients:
+            self.ingredients[ingredient] -= 1
+            if self.ingredients[ingredient] == 0:
+                del self.ingredients[ingredient]
+
+    def add_dietary_restriction(self, restriction):
+        self.dietary_restrictions.append(restriction)
+
+    def remove_dietary_restriction(self, restriction):
+        self.dietary_restrictions.remove(restriction)
+
+    def generate_plan(self, num_meals):
+        # code to generate meal plan based on user preferences and dietary restrictions
+        pass
+
+    def generate_grocery_list(self):
+        # code to generate grocery list from ingredients
+        pass
+
+meal_plan = MealPlan()
+meal1 = Meal("Spaghetti Bolognese", ["spaghetti", "ground beef", "tomato sauce", "onion", "garlic"])
+meal2 = Meal("Chicken Stir-Fry", ["chicken breast", "vegetables", "rice", "soy sauce"])
+meal_plan.add_meal(meal1)
+meal_plan.add_meal(meal2)
+meal_plan.add_dietary_restriction("gluten-free")
+
+meal_plan.generate_plan(5)
+grocery_list = meal_plan.generate_grocery_list()
+print(grocery_list)
